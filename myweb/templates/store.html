@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="{% static 'css/st.css' %}">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-logo">
+            <!-- <img src="your-logo.png" alt="Logo"> -->
+            <a class="logo" href="{% url 'home' %}">Lilly Clothing</a>
+        </div>
+        <div class="navbar-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a class="active" href="#">STORE</a>
+            <a href="{%url 'about' %}">About</a>
+        </div>
+    </div>
+
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-9 fw-bolder">Empower Your Active Life</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Wear with Strength, Move with Grace!</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="about">
+        <div class="container">
+            <div class="item-container">
+                <section class="py-5">
+                    <div class="container">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+                            {% for single_product in products %}
+                            <div class="col">
+                                <div class="card mb-4">
+                                    <img src="{{ single_product.image.url }}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ single_product.product_name }}</h5>
+                                        <p class="card-text">{{ single_product.product_description }}</p>
+                                        <p class="card-text">{{ single_product.date|timesince }} ago</p>
+                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                            <div class="text-center"><a onclick="showAlert()"
+                                                    class="btn btn-outline-dark mt-auto" href="#">Buy
+                                                </a></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </section>
+
+
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Web Assignment by Gelila Demis</p>
+        </div>
+    </footer>
+    <script>
+        function showAlert() {
+            alert("Thank you for choosing us! please comeback letter");
+        }
+    </script>
+
+</body>
+
+</html>
