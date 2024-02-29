@@ -1,37 +1,50 @@
-<!-- landing.html -->
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Django Hero Landing Page</title>
-    <!-- Include CSS files -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" media="screen">
-</head>
-
-<body>
-    <!-- Navigation bar -->
-    <div class="navbar">
-        <div class="navbar-logo">
-            <!-- <img src="your-logo.png" alt="Logo"> -->
-            <a class="logo" href="{% url 'home' %}">Lilly Clothing</a>
-        </div>
-        <div class="navbar-links">
-            <a class="active" href="{% url 'home' %}">Home</a>
-            <a href="{% url 'store' %}">STORE</a>
-            <a href="{% url 'about' %}">About</a>
+{% extends 'base.html' %}
+{% block title %}{{ store }} - Bookshop{% endblock %}
+{% block content %}
+<style>
+    .bg-light-pink {
+        background-color: lightpink;
+    }
+</style>
+<header class="bg-light-pink py-5">
+    <div class="container-fluid px-0">
+        <div class="text-center text-black px-4 px-lg-5">
+            <h1 class="display-9 fw-bolder">Empower Your Active Life</h1>
+            <p class="lead fw-normal text-black-50 mb-0">Wear with Strength, Move with Grace!</p>
         </div>
     </div>
-    <!-- Hero section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome To Lillys Sports wear</h1>
-            <p class="hero-notes">Wear with Strength, Move with Grace!</p>
-            <a href="{% url 'store' %}" class="btn">Shope Now</a>
+</header>
+    <section class="about">
+        <div class="container">
+            <div class="item-container">
+                <section class="py-5">
+                    <div class="container">
+                        <div class="row">
+                            {% for single_product in products %}
+                            <div class="col-md-3 mb-4">
+                                <div class="card">
+                                    <img src="{{ single_product.image.url }}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ single_product.product_name }}</h5>
+                                        <p class="card-text">{{ single_product.product_description }}</p>
+                                        <p class="card-text">{{ single_product.date|timesince }} ago</p>
+                                        <div class="text-center">
+                                            <a onclick="buyProduct('{{ single_product.id }}')"
+                                                class="btn btn-outline-dark mt-auto" href="#">Buy</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     </section>
-</body>
-
-</html>
+    <footer class="bg-light-pink py-5">
+        <div class="container">
+            <p class="m-0 text-center text-white">Web Assignment by Gelila Demis</p>
+        </div>
+    </footer>
+    {% endblock %}
